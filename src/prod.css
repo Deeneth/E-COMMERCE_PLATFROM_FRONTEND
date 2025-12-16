@@ -1,0 +1,121 @@
+/* Rounded image and consistent cropping */
+.card img,
+.product-img {
+  width: 100%;
+  height: 180px;         /* adjust if you want taller/shorter */
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 10px;   /* match card radius */
+  border-top-right-radius: 10px;
+}
+
+/* Make image not inherit card's overflow so radius is visible on zooms */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  overflow: hidden;            /* keeps corners rounded */
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;           /* uniform tile height */
+}
+
+/* Ensure content grows to fill tile and avoid big blank space */
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1 1 auto;             /* allows body to expand */
+}
+
+/* Title */
+.title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Description: clamp to 2 lines so card height stays tidy */
+.desc {
+  margin: 0;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Price */
+.price {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Button: keep it at the bottom of the card body */
+.btn {
+  margin-top: auto;      /* pushes button to the bottom */
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: #111827;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Hover lift */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+}
+
+/* Responsive tweaks (keep what you had) */
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* --- FIX GRID LAYOUT: make tiles show properly in rows --- */
+.grid {
+  display: grid;
+  gap: 16px;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+/* --- CARD BODY FLEX FIX --- */
+.card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;              /* allows space to fill neatly */
+  gap: 10px;            /* spacing between title/desc/price/button */
+}
+
+/* --- MAKE DESCRIPTION VISIBLE (3-line clamp) --- */
+.desc {
+  margin: 0;
+  color: #444;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;     /* show more text */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3.6em;         /* ensures visible space */
+}
+
+/* --- BUTTON POSITION FIX (stick to bottom) --- */
+.btn {
+  margin-top: auto;      /* pushes button to bottom */
+}
